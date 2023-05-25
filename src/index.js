@@ -1,10 +1,9 @@
 const express = require("express");
-const app = express();
+const routes = require("./routes");
 
-app.get("/", (request, response) => {
-  response.send("Teste");
-});
+const app = express();
+app.use(routes);
 
 app.listen(3001, () =>
-  console.log("Servidor rodando na http://localhost/3001")
+  console.log("Servidoor rodando na http://localhost/3001")
 );

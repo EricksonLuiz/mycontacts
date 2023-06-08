@@ -6,4 +6,6 @@ const router = Router(); // define a variável com o valor do express
 
 router.get("/contacts", ContactController.index); // passa o get pela rota e usa o index de dentro do controller.
 router.get("/contacts/:id", ContactController.show);
+router.delete("/contacts/:id", ContactController.delete);
+
 module.exports = router;

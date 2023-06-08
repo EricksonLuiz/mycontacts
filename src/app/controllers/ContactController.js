@@ -29,8 +29,20 @@ class ContactController {
     response.send("Enviado direto do Controller");
   }
 
-  delete() {
+  async delete(request, response) {
     // deletar UM registro
+    const { id } = request.params;
+
+    const contact = await ContactsRepository.findById(id);
+
+    
+    if (!contact) {
+      return response.status(404).json({ error: "Usuário não encontrado." });
+    }
+
+    await ContactsRepository.delete(id);
+
+    response.sendStatus(204);
   }
 }
 

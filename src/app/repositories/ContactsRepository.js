@@ -1,4 +1,6 @@
 const { v4 } = require("uuid");
+
+// Lista de contatos pré setados
 let contacts = [
   {
     id: v4(),
@@ -17,25 +19,25 @@ let contacts = [
 ];
 
 class ContactsRepository {
-  findAll() {
+  findAll() {                           // função para listar todos os contatos
     return new Promise((resolve) => {
       resolve(contacts);
     });
   }
 
-  findById(id) {
+  findById(id) {                        // função para verificar registro pelo ID
     return new Promise((resolve) =>
       resolve(contacts.find((contact) => contact.id == id))
     );
   }
 
-  findByEmail(email) {
+  findByEmail(email) {                  // função para verificar registro pelo EMAIL
     return new Promise((resolve) =>
       resolve(contacts.find((contact) => contact.email == email))
     );
   }
 
-  delete(id){
+  delete(id){                           // função para filtrar ID específico
     return new Promise((resolve) => {
       contacts = contacts.filter((contact) => contact.id !== id)
       resolve();
@@ -43,7 +45,7 @@ class ContactsRepository {
   }
 
 
-  create({ name, email, phone, category_id, }){
+  create({ name, email, phone, category_id, }){   // função para criar novo registro
     return new Promise((resolve) => {
       const newContact = {
         id: v4(),
@@ -57,7 +59,7 @@ class ContactsRepository {
     });
   }
 
-  update(id, { name, email, phone, category_id, }){
+  update(id, { name, email, phone, category_id, }){   // função para alterar registro pelo ID
     return new Promise((resolve) => {
       const updateContact = {
         id,

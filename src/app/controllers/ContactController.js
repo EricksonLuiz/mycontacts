@@ -19,14 +19,49 @@ class ContactController {
     response.json(contact);
   }
 
-  store(request, response) {
+  async store(request, response) {
     // Criar UM registro
-    response.send("Enviado direto do Controller");
-  }
+    const { name, email, phone, category_id } = request.body;
 
-  update(request, response) {
+    if(!name){
+      return response.status(400).json({error: "Nome não enviado!"})
+    }
+
+    const contactExists = await ContactsRepository.findByEmail(email);
+
+    if(contactExists){
+      return response.status(400).json({error: "Email já cadastrado!"})
+    }
+
+    const contact = await ContactsRepository.create({
+      name, email, phone, category_id,
+    })
+
+    response.json(contact);
+  }
+  
+  async update(request, response) {
     // Editar UM registro
-    response.send("Enviado direto do Controller");
+    const { id } = request.params;
+    const { name, email, phone, category_id } = request.body; 
+
+    const contactExists = await ContactsRepository.findById(id);
+    if(!contactExists){
+      return response.status(400).json({error: "Nome não enviado!"})
+    }
+    
+    if(!name){
+      return response.status(400).json({error: "Nome não enviado!"})
+    }
+    
+    const contactByEmail = await ContactsRepository.findByEmail(email);
+    if(contactByEmail && contactByEmail.id !== id){
+      return response.status(400).json({error: "Email já cadastrado!"})
+    }
+
+    const contact = await ContactsRepository.update(id,{ name, email, phone, category_id, });
+
+    response.json(contact);
   }
 
   async delete(request, response) {

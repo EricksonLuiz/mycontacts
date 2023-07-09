@@ -1,6 +1,7 @@
 
 const { Router } = require("express"); // importa o express
 const ContactController = require("./app/controllers/ContactController"); // importa o controller
+const CategoryController = require("./app/controllers/CategoryController")// importa o controller
 const router = Router(); // define a variável com o parametro do express
 
 
@@ -10,4 +11,7 @@ router.delete("/contacts/:id", ContactController.delete);  //Rota para deletar u
 router.post("/contacts", ContactController.store);  //Rota para adicionar um registro
 router.put("/contacts/:id", ContactController.update);  //Rota para alterar um registro específico 
 
+
+router.get("/categories", CategoryController.index)
+router.post("/categories", CategoryController.store)
 module.exports = router;

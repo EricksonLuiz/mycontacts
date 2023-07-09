@@ -6,23 +6,17 @@
 -- E então executamos os comando SQL para criar a DATABASE e os demais tabelas do banco de dados.
 
 -- Comandos
--- CREATE DATABASE mycontacts;
--- CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE DATABASE mycontacts;
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 -- \c mycontacts;
--- CREATE TABLE IF NOT EXISTS categories(
---    id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
---    name VARCHAR NOT NULL
---)
+CREATE TABLE IF NOT EXISTS categories(
+   id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
+   name VARCHAR NOT NULL
+)
+
 -- \l
 -- \dt    Lista todos as Tabelas criados
--- CREATE TABLE IF NOT EXISTS contacts (
---    id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(), 
---    name VARCHAR NOT NULL,
---    email VARCHAR UNIQUE,
---    phone VARCHAR,
---    category_id UUID,
---    FOREIGN KEY(category_id) REFERENCES categories(id)
---);
+
 CREATE TABLE IF NOT EXISTS contacts (
     id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(), 
     name VARCHAR NOT NULL,
@@ -31,3 +25,5 @@ CREATE TABLE IF NOT EXISTS contacts (
     category_id UUID,
     FOREIGN KEY(category_id) REFERENCES categories(id)
 );
+
+

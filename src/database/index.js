@@ -12,9 +12,9 @@ const client = new Client({ // desistruturando as infos de login do pg.
 client.connect();
 // executar src/database/index.js para testar conexão com banco de dados.
 
-exports.query = async (query) => {
-    const { rows } = await client.query(query);
+exports.query = async (query, values) => {
+    const { rows } = await client.query(query, values);
     return rows;
 }
 
-Query('SELECT * FROM contacts').then(console.log);
+// Query('SELECT * FROM contacts').then(console.log);
